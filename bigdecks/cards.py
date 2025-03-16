@@ -35,7 +35,7 @@ def populate_cards_command():
     with CardsManager() as manager:
         if not manager._bulk_data_up_to_date() or \
            not os.path.exists(manager._get_default_cards_path()):
-            click.echo("Donloading the latest card data.")
+            click.echo("Downloading the latest card data.")
             success = manager._download_default_cards()
             if not success:
                 click.echo("Failed to download card data.", err=True)
