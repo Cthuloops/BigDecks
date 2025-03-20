@@ -4,6 +4,7 @@
 import click
 import os
 import sqlite3
+from cards import CardsManager
 from datetime import datetime
 from flask import Flask, g, current_app
 
@@ -35,6 +36,10 @@ def init_app(app: Flask):
     with app.app_context():
         for db in ["users", "cards"]:
             init_db(db)
+
+    # Populate the cards database
+    with CardsManager() as manager:
+        manager.populate_card_database()
 
     # Register the teardown function to close database connections
     app.teardown_appcontext(close_connections)
